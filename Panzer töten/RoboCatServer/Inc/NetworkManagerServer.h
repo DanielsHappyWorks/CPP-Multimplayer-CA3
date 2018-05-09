@@ -17,6 +17,7 @@ public:
 			void			SetStateDirty( int inNetworkId, uint32_t inDirtyState );
 
 			void			RespawnCats();
+			void			ResetPickup();
 
 			ClientProxyPtr	GetClientProxy( int inPlayerId ) const;
 
