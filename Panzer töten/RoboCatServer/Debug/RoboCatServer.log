@@ -1,16 +1,13 @@
-﻿  YarnServer.cpp
-  RoboCatServer.cpp
-  Generating Code...
-  RoboCatServer.vcxproj -> F:\Users\GrapeCauliflower\Desktop\RoboCatAction\Debug\RoboCatServer.exe
-  RoboCatServer.vcxproj -> F:\Users\GrapeCauliflower\Desktop\RoboCatAction\Debug\RoboCatServer.pdb (Partial PDB)
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\libfreetype-6.dll
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\libogg-0.dll
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\libpng16-16.dll
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\libvorbis-0.dll
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\libvorbisfile-3.dll
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\SDL2.dll
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\SDL2_image.dll
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\SDL2_mixer.dll
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\SDL2_ttf.dll
-  F:\Users\GrapeCauliflower\Desktop\RoboCatAction\RoboCatServer\\..\SDL\lib\win\x86\zlib1.dll
+﻿  RoboCatServer.vcxproj -> F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\Debug\RoboCatServer.exe
+  RoboCatServer.vcxproj -> F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\Debug\RoboCatServer.pdb (Partial PDB)
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\libfreetype-6.dll
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\libogg-0.dll
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\libpng16-16.dll
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\libvorbis-0.dll
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\libvorbisfile-3.dll
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\SDL2.dll
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\SDL2_image.dll
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\SDL2_mixer.dll
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\SDL2_ttf.dll
+  F:\Users\GrapeCauliflower\Documents\CPP-Multimplayer-CA3\Panzer töten\RoboCatServer\\..\SDL\lib\win\x86\zlib1.dll
   10 File(s) copied
