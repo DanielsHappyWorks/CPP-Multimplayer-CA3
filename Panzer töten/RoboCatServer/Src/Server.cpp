@@ -38,7 +38,18 @@ int Server::Run()
 
 bool Server::InitNetworkManager()
 {
-	string portString = StringUtils::GetCommandLineArg( 1 );
+	string portString;
+
+	std::ifstream inputFile("port.txt");
+	if (inputFile >> portString) {
+	}
+	else {
+		// If open/read failed, create new file
+		std::ofstream outputFile("port.txt");
+		portString = "50001";
+		outputFile << portString << std::endl;
+	}
+
 	uint16_t port = stoi( portString );
 
 	return NetworkManagerServer::StaticInit( port );

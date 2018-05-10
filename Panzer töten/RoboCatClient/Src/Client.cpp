@@ -1,4 +1,3 @@
-
 #include <RoboCatClientPCH.h>
 
 bool Client::StaticInit( )
@@ -33,12 +32,27 @@ Client::Client()
 	GameObjectRegistry::sInstance->RegisterCreationFunction( 'MOUS', MouseClient::StaticCreate );
 	GameObjectRegistry::sInstance->RegisterCreationFunction( 'YARN', YarnClient::StaticCreate );
 
-	string destination = StringUtils::GetCommandLineArg( 1 );
-	string name = StringUtils::GetCommandLineArg( 2 );
+	string destination;
+	string name;
+	string password;
+
+	std::ifstream inputFile("ip.txt");
+	if (inputFile >> destination && inputFile >> name && inputFile >> password) {
+	}
+	else {
+		// If open/read failed, create new file
+		std::ofstream outputFile("ip.txt");
+		destination = "127.0.0.1:50001";
+		name = "DefName";
+		password = "DefPassword";
+		outputFile << destination << std::endl;
+		outputFile << name << std::endl;
+		outputFile << password << std::endl;
+	}
 
 	SocketAddressPtr serverAddress = SocketAddressFactory::CreateIPv4FromString( destination );
 
-	NetworkManagerClient::StaticInit( *serverAddress, name );
+	NetworkManagerClient::StaticInit( *serverAddress, name , password);
 
 	//NetworkManagerClient::sInstance->SetDropPacketChance( 0.6f );
 	//NetworkManagerClient::sInstance->SetSimulatedLatency( 0.25f );

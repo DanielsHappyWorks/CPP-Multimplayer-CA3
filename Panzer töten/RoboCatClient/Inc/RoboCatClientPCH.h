@@ -22,3 +22,6 @@
 #include <NetworkManagerClient.h>
 #include <Client.h>
 
+#include <iostream>
+#include <fstream>
+

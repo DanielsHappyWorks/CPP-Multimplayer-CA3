@@ -70,7 +70,6 @@ void NetworkManagerServer::ProcessPacket( ClientProxyPtr inClientProxy, InputMem
 	}
 }
 
-
 void NetworkManagerServer::HandlePacketFromNewClient( InputMemoryBitStream& inInputStream, const SocketAddress& inFromAddress )
 {
 	//read the beginning- is it a hello?
@@ -79,24 +78,79 @@ void NetworkManagerServer::HandlePacketFromNewClient( InputMemoryBitStream& inIn
 	if(  packetType == kHelloCC )
 	{
 		//read the name
-		string name;
+		string name, password;
 		inInputStream.Read( name );
-		ClientProxyPtr newClientProxy = std::make_shared< ClientProxy >( inFromAddress, name, mNewPlayerId++ );
-		mAddressToClientMap[ inFromAddress ] = newClientProxy;
-		mPlayerIdToClientMap[ newClientProxy->GetPlayerId() ] = newClientProxy;
-		
-		//tell the server about this client, spawn a cat, etc...
-		//if we had a generic message system, this would be a good use for it...
-		//instead we'll just tell the server directly
-		static_cast< Server* > ( Engine::sInstance.get() )->HandleNewClient( newClientProxy );
+		inInputStream.Read( password );
 
-		//and welcome the client...
-		SendWelcomePacket( newClientProxy );
+		if (name.length() < 12) {
+			//get pasword for specific name
+			//if passowrd is the same accept player
+			//if not exists create account
+			bool nameFound = false;
+			bool correctPassword = false;
+			bool playerIsLoggedIn = false;
 
-		//and now init the replication manager with everything we know about!
-		for( const auto& pair: mNetworkIdToGameObjectMap )
-		{
-			newClientProxy->GetReplicationManagerServer().ReplicateCreate( pair.first, pair.second->GetAllStateMask() );
+			std::ifstream inputFile("players.txt");
+			if (inputFile.good()) {
+				std::string savedName, savedPass;
+				while (std::getline(inputFile, savedName)) {
+					std::getline(inputFile, savedPass);
+					if (savedName == name) {
+						if (savedPass == password) {
+							correctPassword = true;
+							//check if player is already online
+							for (auto it = mAddressToClientMap.begin(), end = mAddressToClientMap.end(); it != end; ++it)
+							{
+								if (savedName == it->second->GetName()) {
+									playerIsLoggedIn = true;
+								}
+							}
+						}
+						nameFound = true;
+						break;
+					}
+				}
+			}
+
+			if (nameFound && correctPassword) {
+				//correct information
+				if (!playerIsLoggedIn) {
+					ClientProxyPtr newClientProxy = std::make_shared< ClientProxy >(inFromAddress, name, mNewPlayerId++);
+					mAddressToClientMap[inFromAddress] = newClientProxy;
+					mPlayerIdToClientMap[newClientProxy->GetPlayerId()] = newClientProxy;
+
+					//tell the server about this client, spawn a cat, etc...
+					//if we had a generic message system, this would be a good use for it...
+					//instead we'll just tell the server directly
+					static_cast<Server*> (Engine::sInstance.get())->HandleNewClient(newClientProxy);
+
+					//and welcome the client...
+					SendWelcomePacket(newClientProxy);
+
+					//and now init the replication manager with everything we know about!
+					for (const auto& pair : mNetworkIdToGameObjectMap)
+					{
+						newClientProxy->GetReplicationManagerServer().ReplicateCreate(pair.first, pair.second->GetAllStateMask());
+					}
+				}
+				else {
+					LOG("Player is already logged in %s", inFromAddress.ToString().c_str());
+				}
+			}
+			else if (!nameFound) {
+				//accound non-existant
+				std::ofstream outputFile("players.txt", std::ios::app);
+				outputFile << name << std::endl;
+				outputFile << password << std::endl;
+			}
+			else if (!correctPassword) {
+				//wrong password
+				LOG("Player password incorrect %s", inFromAddress.ToString().c_str());
+			}
+		}
+		else {
+			//name too long
+			LOG("Player Name is more then 12 char long %s", inFromAddress.ToString().c_str());
 		}
 	}
 	else

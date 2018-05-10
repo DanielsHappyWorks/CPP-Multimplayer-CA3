@@ -15,13 +15,13 @@ NetworkManagerClient::NetworkManagerClient() :
 {
 }
 
-void NetworkManagerClient::StaticInit( const SocketAddress& inServerAddress, const string& inName )
+void NetworkManagerClient::StaticInit( const SocketAddress& inServerAddress, const string& inName, const string& inPass)
 {
 	sInstance = new NetworkManagerClient();
-	return sInstance->Init( inServerAddress, inName );
+	return sInstance->Init( inServerAddress, inName, inPass);
 }
 
-void NetworkManagerClient::Init( const SocketAddress& inServerAddress, const string& inName )
+void NetworkManagerClient::Init( const SocketAddress& inServerAddress, const string& inName, const string& inPass)
 {
 	NetworkManager::Init( 0 );
 
@@ -29,6 +29,7 @@ void NetworkManagerClient::Init( const SocketAddress& inServerAddress, const str
 	mState = NCS_SayingHello;
 	mTimeOfLastHello = 0.f;
 	mName = inName;
+	mPassword = inPass;
 
 	mAvgRoundTripTime = WeightedTimedMovingAverage( 1.f );
 }
@@ -82,6 +83,7 @@ void NetworkManagerClient::SendHelloPacket()
 
 	helloPacket.Write( kHelloCC );
 	helloPacket.Write( mName );
+	helloPacket.Write( mPassword );
 
 	SendPacket( helloPacket, mServerAddress );
 }
