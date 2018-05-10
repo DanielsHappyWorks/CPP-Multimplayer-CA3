@@ -25,3 +25,5 @@
 #include <iostream>
 #include <fstream>
 
+#include <SDL_mixer.h>
+
