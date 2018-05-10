@@ -79,8 +79,6 @@ void ScoreBoardManager::IncScore( uint32_t inPlayerId, int inAmount )
 	}
 }
 
-
-
 bool ScoreBoardManager::Write( OutputMemoryBitStream& inOutputStream ) const
 {
 	int entryCount = mEntries.size();

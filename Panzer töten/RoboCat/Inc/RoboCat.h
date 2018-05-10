@@ -27,6 +27,7 @@ public:
 
 	void ProcessCollisions();
 	void ProcessCollisionsWithScreenWalls();
+	void HandleHealthIncrease(int health);
 
 	void		SetPlayerId( uint32_t inPlayerId )			{ mPlayerId = inPlayerId; }
 	uint32_t	GetPlayerId()						const 	{ return mPlayerId; }

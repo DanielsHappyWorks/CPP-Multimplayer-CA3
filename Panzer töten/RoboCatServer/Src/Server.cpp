@@ -103,7 +103,10 @@ void Server::SpawnCatForPlayer( int inPlayerId )
 	cat->SetColor( ScoreBoardManager::sInstance->GetEntry( inPlayerId )->GetColor() );
 	cat->SetPlayerId( inPlayerId );
 	//gotta pick a better spawn location than this...
-	cat->SetLocation( Vector3( 1.f - static_cast< float >( inPlayerId ), 0.f, 0.f ) );
+	Vector3 mouseMin(-5.f, -3.f, 0.f);
+	Vector3 mouseMax(5.f, 3.f, 0.f);
+	Vector3 mouseLocation = RoboMath::GetRandomVector(mouseMin, mouseMax);
+	cat->SetLocation(mouseLocation);
 
 }
 

@@ -16,7 +16,8 @@ RoboCat::RoboCat() :
 	mIsShooting( false ),
 	mHealth( 3 )
 {
-	SetCollisionRadius( 0.5f );
+	SetScale(GetScale() * 0.5f);
+	SetCollisionRadius( 0.25f );
 }
 
 void RoboCat::ProcessInput( float inDeltaTime, const InputState& inInputState )
@@ -59,6 +60,12 @@ void RoboCat::Update()
 {
 	
 }
+
+void RoboCat::HandleHealthIncrease(int health)
+{
+	mHealth += health;
+}
+
 
 void RoboCat::ProcessCollisions()
 {
@@ -154,10 +161,10 @@ void RoboCat::ProcessCollisionsWithScreenWalls()
 		location.mY = HALF_WORLD_HEIGHT - radius;
 		SetLocation( location );
 	}
-	else if( y <= ( -HALF_WORLD_HEIGHT - radius ) && vy < 0 )
+	else if( y <= ( -HALF_WORLD_HEIGHT + radius ) && vy < 0 )
 	{
 		mVelocity.mY = -vy * mWallRestitution;
-		location.mY = -HALF_WORLD_HEIGHT - radius;
+		location.mY = -HALF_WORLD_HEIGHT + radius;
 		SetLocation( location );
 	}
 
@@ -167,10 +174,10 @@ void RoboCat::ProcessCollisionsWithScreenWalls()
 		location.mX = HALF_WORLD_WIDTH - radius;
 		SetLocation( location );
 	}
-	else if(  x <= ( -HALF_WORLD_WIDTH - radius ) && vx < 0 )
+	else if(  x <= ( -HALF_WORLD_WIDTH + radius ) && vx < 0 )
 	{
 		mVelocity.mX = -vx * mWallRestitution;
-		location.mX = -HALF_WORLD_WIDTH - radius;
+		location.mX = -HALF_WORLD_WIDTH + radius;
 		SetLocation( location );
 	}
 }
