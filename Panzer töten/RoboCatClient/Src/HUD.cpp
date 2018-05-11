@@ -4,15 +4,15 @@ std::unique_ptr< HUD >	HUD::sInstance;
 
 
 HUD::HUD() :
-mScoreBoardOrigin( 50.f, 60.f, 0.0f ),
-mBandwidthOrigin( 50.f, 10.f, 0.0f ),
-mRoundTripTimeOrigin( 50.f, 10.f, 0.0f ),
-mScoreOffset( 0.f, 50.f, 0.0f ),
-mHealthOffset( 1000, 10.f, 0.0f ),
+mScoreBoardOrigin( 25.f, 10.f, 0.0f ),
+mBandwidthOrigin( 25.f, 650.f, 0.0f ),
+mRoundTripTimeOrigin( 25.f, 670.f, 0.0f ),
+mScoreOffset( 0.f, 25.f, 0.0f ),
+mHealthOffset( 1100, 10.f, 0.0f ),
 mHealth( 0 )
 {
 	TTF_Init();
-	mFont = TTF_OpenFont( "../Assets/Carlito-Regular.TTF", 36 );
+	mFont = TTF_OpenFont( "../Assets/Carlito-Regular.TTF", 24 );
 	if( mFont == nullptr )
 	{
 		SDL_LogError( SDL_LOG_CATEGORY_ERROR, "Failed to load font." );
@@ -27,7 +27,7 @@ void HUD::StaticInit()
 
 void HUD::Render()
 {
-	//RenderBandWidth();
+	RenderBandWidth();
 	RenderRoundTripTime();
 	RenderScoreBoard();
 	RenderHealth();
@@ -37,7 +37,13 @@ void HUD::RenderHealth()
 {
 	if( mHealth > 0 )
 	{
-		string healthString = StringUtils::Sprintf( "Health %d", mHealth );
+		string healthString = "";
+		if (mHealth != 5) {
+			healthString = StringUtils::Sprintf("Health %d", mHealth);
+		}
+		else {
+			healthString = StringUtils::Sprintf("Max Health %d", mHealth);
+		}
 		RenderText( healthString, mHealthOffset, Colors::Red );
 	}
 }
@@ -60,8 +66,11 @@ void HUD::RenderRoundTripTime()
 
 void HUD::RenderScoreBoard()
 {
+	string scoreBoardHeader = StringUtils::Sprintf("%-10s%-10s%-10s","Name","Score","Wins");
+	RenderText(scoreBoardHeader, mScoreBoardOrigin, Colors::Black);
+
 	const vector< ScoreBoardManager::Entry >& entries = ScoreBoardManager::sInstance->GetEntries();
-	Vector3 offset = mScoreBoardOrigin;
+	Vector3 offset = mScoreBoardOrigin + mScoreOffset;
 	
 	for( const auto& entry: entries )
 	{

@@ -63,7 +63,9 @@ void RoboCat::Update()
 
 void RoboCat::HandleHealthIncrease(int health)
 {
-	mHealth += health;
+	if (mHealth < 5) {
+		mHealth += health;
+	}
 }
 
 

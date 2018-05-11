@@ -82,7 +82,7 @@ void RoboCatServer::TakeDamage( int inDamagingPlayerId )
 		//score one for damaging player...
 		ScoreBoardManager::sInstance->IncSessionScore( inDamagingPlayerId, 1 );
 
-		if (ScoreBoardManager::sInstance->GetEntry(inDamagingPlayerId)->GetSessionScore() >= 2) {
+		if (ScoreBoardManager::sInstance->GetEntry(inDamagingPlayerId)->GetSessionScore() >= 10) {
 			ScoreBoardManager::sInstance->SetSessionWinner(inDamagingPlayerId);
 
 			std::string output = "";

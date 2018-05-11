@@ -82,7 +82,7 @@ void NetworkManagerServer::HandlePacketFromNewClient( InputMemoryBitStream& inIn
 		inInputStream.Read( name );
 		inInputStream.Read( password );
 
-		if (name.length() < 12) {
+		if (name.length() <= 12) {
 			//get pasword for specific name
 			//if passowrd is the same accept player
 			//if not exists create account
