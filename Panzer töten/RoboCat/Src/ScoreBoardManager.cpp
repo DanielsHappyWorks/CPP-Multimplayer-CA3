@@ -16,22 +16,28 @@ ScoreBoardManager::ScoreBoardManager()
 	mDefaultColors.push_back( Colors::LightGreen );
 }
 
-ScoreBoardManager::Entry::Entry( uint32_t inPlayerId, const string& inPlayerName, const Vector3& inColor ) :
+ScoreBoardManager::Entry::Entry( uint32_t inPlayerId, const string& inPlayerName, const Vector3& inColor, int totalScore) :
 mPlayerId( inPlayerId ),
 mPlayerName( inPlayerName ),
-mColor( inColor )
+mColor( inColor ),
+mTotalScore( totalScore )
 {
-	SetScore( 0 );
+	SetSessionScore( 0 );
 }
 
-void ScoreBoardManager::Entry::SetScore( int32_t inScore )
+void ScoreBoardManager::Entry::SetSessionScore( int32_t inScore )
 {
-	mScore = inScore;
+	mSessionScore = inScore;
 
 	char	buffer[ 256 ];
-	snprintf( buffer, 256, "%s %i", mPlayerName.c_str(), mScore );
+	snprintf( buffer, 256, "%s %i:%i", mPlayerName.c_str(), mSessionScore, mTotalScore);
 	mFormattedNameScore = string( buffer );
 
+}
+
+void ScoreBoardManager::Entry::SetTotalScore(int32_t inScore)
+{
+	mTotalScore = inScore;
 }
 
 
@@ -62,21 +68,39 @@ bool ScoreBoardManager::RemoveEntry( uint32_t inPlayerId )
 	return false;
 }
 
-void ScoreBoardManager::AddEntry( uint32_t inPlayerId, const string& inPlayerName )
+void ScoreBoardManager::AddEntry( uint32_t inPlayerId, const string& inPlayerName, int totalScore )
 {
 	//if this player id exists already, remove it first- it would be crazy to have two of the same id
 	RemoveEntry( inPlayerId );
 	
-	mEntries.emplace_back( inPlayerId, inPlayerName, mDefaultColors[ inPlayerId % mDefaultColors.size() ] );
+	mEntries.emplace_back( inPlayerId, inPlayerName, mDefaultColors[ inPlayerId % mDefaultColors.size() ], totalScore);
 }
 
-void ScoreBoardManager::IncScore( uint32_t inPlayerId, int inAmount )
+void ScoreBoardManager::IncSessionScore( uint32_t inPlayerId, int inAmount )
 {
 	Entry* entry = GetEntry( inPlayerId );
 	if( entry )
 	{
-		entry->SetScore( entry->GetScore() + inAmount );
+		entry->SetSessionScore( entry->GetSessionScore() + inAmount );
 	}
+}
+
+void ScoreBoardManager::IncTotalScore(uint32_t inPlayerId, int inAmount)
+{
+	Entry* entry = GetEntry(inPlayerId);
+	if (entry)
+	{
+		entry->SetTotalScore(entry->GetTotalScore() + inAmount);
+	}
+}
+
+void ScoreBoardManager::SetSessionWinner(uint32_t inPlayerId) {
+	for (Entry& entry : mEntries)
+	{
+		entry.SetSessionScore(0);
+	}
+
+	IncTotalScore(inPlayerId, 1);
 }
 
 bool ScoreBoardManager::Write( OutputMemoryBitStream& inOutputStream ) const
@@ -118,7 +142,8 @@ bool ScoreBoardManager::Entry::Write( OutputMemoryBitStream& inOutputStream ) co
 	inOutputStream.Write( mColor );
 	inOutputStream.Write( mPlayerId );
 	inOutputStream.Write( mPlayerName );
-	inOutputStream.Write( mScore );
+	inOutputStream.Write( mSessionScore );
+	inOutputStream.Write( mTotalScore );
 
 	return didSucceed;
 }
@@ -132,11 +157,14 @@ bool ScoreBoardManager::Entry::Read( InputMemoryBitStream& inInputStream )
 
 	inInputStream.Read( mPlayerName );
 
-	int score;
-	inInputStream.Read( score );
+	int scoreSess;
+	inInputStream.Read(scoreSess);
+	int scoreTot;
+	inInputStream.Read(scoreTot);
 	if( didSucceed )
 	{
-		SetScore( score );
+		SetSessionScore(scoreSess);
+		SetTotalScore(scoreTot);
 	}
 
 

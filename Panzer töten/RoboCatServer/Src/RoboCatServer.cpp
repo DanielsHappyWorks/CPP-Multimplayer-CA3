@@ -80,7 +80,35 @@ void RoboCatServer::TakeDamage( int inDamagingPlayerId )
 	if( mHealth <= 0.f )
 	{
 		//score one for damaging player...
-		ScoreBoardManager::sInstance->IncScore( inDamagingPlayerId, 1 );
+		ScoreBoardManager::sInstance->IncSessionScore( inDamagingPlayerId, 1 );
+
+		if (ScoreBoardManager::sInstance->GetEntry(inDamagingPlayerId)->GetSessionScore() >= 2) {
+			ScoreBoardManager::sInstance->SetSessionWinner(inDamagingPlayerId);
+
+			std::string output = "";
+			//coutput to file
+			std::ifstream inputFile("scores.txt");
+			if (inputFile.good()) {
+				std::string savedName, savedScore;
+				while (std::getline(inputFile, savedName)) {
+					output += savedName;
+					std::getline(inputFile, savedScore);
+					output += "\n";
+					if (savedName == ScoreBoardManager::sInstance->GetEntry(inDamagingPlayerId)->GetPlayerName()) {
+						output += std::to_string(ScoreBoardManager::sInstance->GetEntry(inDamagingPlayerId)->GetTotalScore());
+					}
+					else {
+						output += savedScore;
+					}
+					output += "\n";
+				}
+				inputFile.close();
+			}
+
+			std::ofstream outputFile("scores.txt");
+			outputFile << output;
+			outputFile.close();
+		}
 
 		//and you want to die
 		SetDoesWantToDie( true );

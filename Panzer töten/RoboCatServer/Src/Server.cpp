@@ -104,7 +104,35 @@ void Server::HandleNewClient( ClientProxyPtr inClientProxy )
 	
 	int playerId = inClientProxy->GetPlayerId();
 	
-	ScoreBoardManager::sInstance->AddEntry( playerId, inClientProxy->GetName() );
+	//check to see if player has a score
+	bool nameFound = false;
+	int totalScore = 0;
+
+	std::ifstream inputFile("scores.txt");
+	if (inputFile.good()) {
+		std::string savedName, savedScore;
+		while (std::getline(inputFile, savedName)) {
+			std::getline(inputFile, savedScore);
+			if (savedName == inClientProxy->GetName()) {
+				totalScore = stoi(savedScore);
+				nameFound = true;
+				inputFile.close();
+				break;
+			}
+		}
+		inputFile.close();
+	}
+
+
+	if (!nameFound) {
+		//create entry
+		std::ofstream outputFile("scores.txt", std::ios::app);
+		outputFile << inClientProxy->GetName() << std::endl;
+		outputFile << 0 << std::endl;
+		outputFile.close();
+	}
+
+	ScoreBoardManager::sInstance->AddEntry( playerId, inClientProxy->GetName(), totalScore);
 	SpawnCatForPlayer( playerId );
 }
 

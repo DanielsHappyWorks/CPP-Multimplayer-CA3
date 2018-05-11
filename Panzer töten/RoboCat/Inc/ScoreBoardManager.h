@@ -10,15 +10,17 @@ public:
 	public:
 		Entry() {};
 
-		Entry( uint32_t inPlayerID, const string& inPlayerName, const Vector3& inColor );
+		Entry( uint32_t inPlayerID, const string& inPlayerName, const Vector3& inColor, int totalScore );
 
 		const Vector3&	GetColor()		const	{ return mColor; }
 		uint32_t		GetPlayerId()	const	{ return mPlayerId; }
 		const string&	GetPlayerName()	const	{ return mPlayerName; }
 		const string&	GetFormattedNameScore()	const	{ return mFormattedNameScore; }
-		int				GetScore()		const	{ return mScore; }
+		int				GetSessionScore()		const	{ return mSessionScore; }
+		int				GetTotalScore()		const { return mTotalScore; }
 
-		void			SetScore( int inScore );
+		void			SetSessionScore( int inScore );
+		void			SetTotalScore(int inScore);
 
 		bool			Write( OutputMemoryBitStream& inOutputStream ) const;
 		bool			Read( InputMemoryBitStream& inInputStream );
@@ -29,15 +31,18 @@ public:
 		uint32_t		mPlayerId;
 		string			mPlayerName;
 		
-		int				mScore;
+		int				mSessionScore;
+		int				mTotalScore;
 
 		string			mFormattedNameScore;
 	};
 
 	Entry*	GetEntry( uint32_t inPlayerId );
 	bool	RemoveEntry( uint32_t inPlayerId );
-	void	AddEntry( uint32_t inPlayerId, const string& inPlayerName );
-	void	IncScore( uint32_t inPlayerId, int inAmount );
+	void	AddEntry( uint32_t inPlayerId, const string& inPlayerName, int totalScore);
+	void	IncSessionScore( uint32_t inPlayerId, int inAmount );
+	void	IncTotalScore(uint32_t inPlayerId, int inAmount);
+	void	SetSessionWinner(uint32_t inPlayerId);
 
 	bool	Write( OutputMemoryBitStream& inOutputStream ) const;
 	bool	Read( InputMemoryBitStream& inInputStream );
