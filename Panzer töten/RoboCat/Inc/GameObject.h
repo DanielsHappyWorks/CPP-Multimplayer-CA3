@@ -19,6 +19,7 @@ public:
 
 	//return whether to keep processing collision
 	virtual bool	HandleCollisionWithCat( RoboCat* inCat ) { ( void ) inCat; return true; }
+	virtual void	setType(int type) { return; };
 
 	virtual void	Update();
 

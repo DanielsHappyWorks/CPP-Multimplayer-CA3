@@ -31,7 +31,7 @@ bool YarnServer::HandleCollisionWithCat( RoboCat* inCat )
 		//kill yourself!
 		SetDoesWantToDie( true );
 
-		static_cast< RoboCatServer* >( inCat )->TakeDamage( GetPlayerId() );
+		static_cast< RoboCatServer* >( inCat )->TakeDamage();
 
 	}
 

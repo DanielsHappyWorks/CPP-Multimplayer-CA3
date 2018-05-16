@@ -7,6 +7,8 @@ public:
 protected:
 	MouseClient();
 
+	void setType(int t);
+
 private:
 
 	SpriteComponentPtr	mSpriteComponent;

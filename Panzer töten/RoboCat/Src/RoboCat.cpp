@@ -14,7 +14,8 @@ RoboCat::RoboCat() :
 	mThrustDir( 0.f ),
 	mPlayerId( 0 ),
 	mIsShooting( false ),
-	mHealth( 3 )
+	mHealth( 3 ),
+	mMaxHealth(5)
 {
 	SetScale(GetScale() * 0.5f);
 	SetCollisionRadius( 0.25f );
@@ -63,7 +64,7 @@ void RoboCat::Update()
 
 void RoboCat::HandleHealthIncrease(int health)
 {
-	if (mHealth < 5) {
+	if (mHealth < mMaxHealth) {
 		mHealth += health;
 	}
 }

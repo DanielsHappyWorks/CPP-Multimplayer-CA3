@@ -31,6 +31,8 @@ public:
 
 	void		SetPlayerId( uint32_t inPlayerId )			{ mPlayerId = inPlayerId; }
 	uint32_t	GetPlayerId()						const 	{ return mPlayerId; }
+	int			GetHealth()						const { return mHealth; }
+	int			GetMaxHealth()						const { return mMaxHealth; }
 
 	void			SetVelocity( const Vector3& inVelocity )	{ mVelocity = inVelocity; }
 	const Vector3&	GetVelocity()						const	{ return mVelocity; }
@@ -66,6 +68,7 @@ protected:
 
 	float				mThrustDir;
 	int					mHealth;
+	int					mMaxHealth;
 
 	bool				mIsShooting;
 

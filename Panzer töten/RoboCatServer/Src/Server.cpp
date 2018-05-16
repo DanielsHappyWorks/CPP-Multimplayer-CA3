@@ -59,7 +59,7 @@ bool Server::InitNetworkManager()
 namespace
 {
 	
-	void CreateRandomMice( int inMouseCount )
+	void CreateRandomMice( int inMouseCount, Mouse::PickupType type)
 	{
 		Vector3 mouseMin( -5.f, -3.f, 0.f );
 		Vector3 mouseMax( 5.f, 3.f, 0.f );
@@ -69,6 +69,7 @@ namespace
 		for( int i = 0; i < inMouseCount; ++i )
 		{
 			go = GameObjectRegistry::sInstance->CreateGameObject( 'MOUS' );
+			go->setType(type);
 			Vector3 mouseLocation = RoboMath::GetRandomVector( mouseMin, mouseMax );
 			go->SetLocation( mouseLocation );
 		}
@@ -80,9 +81,10 @@ namespace
 
 void Server::SetupWorld()
 {
-	//spawn some random mice
-	CreateRandomMice(5);
-	
+	//spawn some health
+	CreateRandomMice(3, Mouse::PickupType::health);
+	//spawn some mines
+	CreateRandomMice(3, Mouse::PickupType::mine);
 }
 
 void Server::DoFrame()

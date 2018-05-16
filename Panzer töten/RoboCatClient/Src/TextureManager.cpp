@@ -12,6 +12,7 @@ TextureManager::TextureManager()
 {
 	CacheTexture( "player", "../Assets/player.png" );
 	CacheTexture( "pickup", "../Assets/pickup.png" );
+	CacheTexture("mine", "../Assets/mine.png");
 	CacheTexture( "bullet", "../Assets/bullet.png" );
 	
 }

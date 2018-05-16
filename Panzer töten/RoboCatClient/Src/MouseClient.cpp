@@ -6,9 +6,27 @@ MouseClient::MouseClient()
 	mSpriteComponent->SetTexture( TextureManager::sInstance->GetTexture( "pickup" ) );
 }
 
+void MouseClient::setType(int t) { 
+	type = static_cast<PickupType>(t);
+	if (type == PickupType::health) {
+		mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture("pickup"));
+	}
+	else if (type == PickupType::mine) {
+		mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture("mine"));
+	}
+}
+
 void MouseClient::Read(InputMemoryBitStream& inInputStream)
 {
 	bool stateBit;
+
+	inInputStream.Read(stateBit);
+	if (stateBit)
+	{
+		int type;
+		inInputStream.Read(type);
+		setType(type);
+	}
 
 	inInputStream.Read(stateBit);
 	if (stateBit)

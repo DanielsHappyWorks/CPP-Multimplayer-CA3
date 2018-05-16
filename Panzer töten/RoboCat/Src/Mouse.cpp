@@ -19,6 +19,19 @@ uint32_t Mouse::Write( OutputMemoryBitStream& inOutputStream, uint32_t inDirtySt
 {
 	uint32_t writtenState = 0;
 
+	if (inDirtyState & EMRS_Type)
+	{
+		inOutputStream.Write((bool)true);
+
+		inOutputStream.Write(static_cast<int>(type));
+
+		writtenState |= EMRS_Type;
+	}
+	else
+	{
+		inOutputStream.Write((bool)false);
+	}
+
 	if( inDirtyState & EMRS_Pose )
 	{
 		inOutputStream.Write( (bool)true );
@@ -56,6 +69,14 @@ uint32_t Mouse::Write( OutputMemoryBitStream& inOutputStream, uint32_t inDirtySt
 void Mouse::Read( InputMemoryBitStream& inInputStream )
 {
 	bool stateBit;
+
+	inInputStream.Read(stateBit);
+	if (stateBit)
+	{
+		int type;
+		inInputStream.Read(type);
+		setType(type);
+	}
 
 	inInputStream.Read( stateBit );
 	if( stateBit )

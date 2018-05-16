@@ -7,8 +7,15 @@ public:
 	{
 		EMRS_Pose		= 1 << 0,
 		EMRS_Color		= 1 << 1,
+		EMRS_Type		= 1 << 2,
 
-		EMRS_AllState	= EMRS_Pose | EMRS_Color
+		EMRS_AllState	= EMRS_Pose | EMRS_Color | EMRS_Type
+	};
+
+	enum PickupType
+	{
+		health = 1,
+		mine = 2
 	};
 
 	static	GameObject*	StaticCreate() { return new Mouse(); }
@@ -19,8 +26,8 @@ public:
 	virtual void		Read( InputMemoryBitStream& inInputStream ) override;
 
 	virtual bool HandleCollisionWithCat( RoboCat* inCat ) override;
-
+	void setType(int t) { type = static_cast<PickupType>(t);}
 protected:
 	Mouse();
-
+	PickupType type;
 };

@@ -124,3 +124,23 @@ void RoboCatServer::TakeDamage( int inDamagingPlayerId )
 	//tell the world our health dropped
 	NetworkManagerServer::sInstance->SetStateDirty( GetNetworkId(), ECRS_Health );
 }
+
+void RoboCatServer::TakeDamage()
+{
+	mHealth--;
+	if (mHealth <= 0.f)
+	{
+		//and you want to die
+		SetDoesWantToDie(true);
+
+		//tell the client proxy to make you a new cat
+		ClientProxyPtr clientProxy = NetworkManagerServer::sInstance->GetClientProxy(GetPlayerId());
+		if (clientProxy)
+		{
+			clientProxy->HandleCatDied();
+		}
+	}
+
+	//tell the world our health dropped
+	NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ECRS_Health);
+}
