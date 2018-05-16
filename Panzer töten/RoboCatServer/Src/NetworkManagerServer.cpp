@@ -73,6 +73,7 @@ void NetworkManagerServer::ProcessPacket( ClientProxyPtr inClientProxy, InputMem
 void NetworkManagerServer::HandlePacketFromNewClient( InputMemoryBitStream& inInputStream, const SocketAddress& inFromAddress )
 {
 	//read the beginning- is it a hello?
+	std::string msg;
 	uint32_t	packetType;
 	inInputStream.Read( packetType );
 	if(  packetType == kHelloCC )
@@ -134,7 +135,8 @@ void NetworkManagerServer::HandlePacketFromNewClient( InputMemoryBitStream& inIn
 					}
 				}
 				else {
-					LOG("Player is already logged in %s", inFromAddress.ToString().c_str());
+					msg = "Player is already logged in";
+					SendErrorPacket(inFromAddress, msg);
 				}
 			}
 			else if (!nameFound) {
@@ -145,18 +147,21 @@ void NetworkManagerServer::HandlePacketFromNewClient( InputMemoryBitStream& inIn
 			}
 			else if (!correctPassword) {
 				//wrong password
-				LOG("Player password incorrect %s", inFromAddress.ToString().c_str());
+				msg = "Player password incorrect";
+				SendErrorPacket(inFromAddress, msg);
 			}
 		}
 		else {
 			//name too long
-			LOG("Player Name is more then 12 char long %s", inFromAddress.ToString().c_str());
+			msg = "Player Name is more then 12 char long";
+			SendErrorPacket(inFromAddress, msg);
 		}
 	}
 	else
 	{
 		//bad incoming packet from unknown client- we're under attack!!
-		LOG( "Bad incoming packet from unknown client at socket %s", inFromAddress.ToString().c_str() );
+		msg = "Bad incoming packet from unknown client";
+		SendErrorPacket(inFromAddress, msg);
 	}
 }
 
@@ -170,6 +175,18 @@ void NetworkManagerServer::SendWelcomePacket( ClientProxyPtr inClientProxy )
 	LOG( "Server Welcoming, new client '%s' as player %d", inClientProxy->GetName().c_str(), inClientProxy->GetPlayerId() );
 
 	SendPacket( welcomePacket, inClientProxy->GetSocketAddress() );
+}
+
+void NetworkManagerServer::SendErrorPacket(const SocketAddress& inFromAddress, std::string msg)
+{
+	OutputMemoryBitStream errorPacket;
+
+	errorPacket.Write(kErrorCC);
+	errorPacket.Write(msg);
+
+	LOG("%s %s", msg, inFromAddress.ToString().c_str());
+
+	SendPacket(errorPacket, inFromAddress);
 }
 
 void NetworkManagerServer::RespawnCats()

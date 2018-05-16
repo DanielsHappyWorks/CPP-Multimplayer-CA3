@@ -28,6 +28,7 @@ private:
 			void	ProcessPacket( ClientProxyPtr inClientProxy, InputMemoryBitStream& inInputStream );
 			
 			void	SendWelcomePacket( ClientProxyPtr inClientProxy );
+			void	SendErrorPacket(const SocketAddress& inFromAddress, string msg);
 			void	UpdateAllClients();
 			
 			void	AddWorldStateToPacket( OutputMemoryBitStream& inOutputStream );

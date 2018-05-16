@@ -64,15 +64,20 @@ Client::Client()
 
 void Client::DoFrame()
 {
-	InputManager::sInstance->Update();
+		InputManager::sInstance->Update();
 
-	Engine::DoFrame();
+		Engine::DoFrame();
 
-	NetworkManagerClient::sInstance->ProcessIncomingPackets();
+		NetworkManagerClient::sInstance->ProcessIncomingPackets();
 
-	RenderManager::sInstance->Render();
+		RenderManager::sInstance->Render();
 
-	NetworkManagerClient::sInstance->SendOutgoingPackets();
+		//render aditional HUD if error occured
+		if (!NetworkManagerClient::sInstance->RecievedError()) {
+			HUD::sInstance->RenderError(NetworkManagerClient::sInstance->mError);
+		}
+
+		NetworkManagerClient::sInstance->SendOutgoingPackets();
 }
 
 void Client::HandleEvent( SDL_Event* inEvent )

@@ -43,6 +43,9 @@ void NetworkManagerClient::ProcessPacket( InputMemoryBitStream& inInputStream, c
 	case kWelcomeCC:
 		HandleWelcomePacket( inInputStream );
 		break;
+	case kErrorCC:
+		HandleErrorPacket(inInputStream);
+		break;
 	case kStateCC:
 		if( mDeliveryNotificationManager.ReadAndProcessState( inInputStream ) )
 		{
@@ -52,6 +55,23 @@ void NetworkManagerClient::ProcessPacket( InputMemoryBitStream& inInputStream, c
 	}
 }
 
+void NetworkManagerClient::HandleErrorPacket(InputMemoryBitStream& inInputStream)
+{
+	std::string errorMsg;
+	inInputStream.Read(errorMsg);
+	LOG("Error: %s", errorMsg);
+	mError = errorMsg;
+	mState = NCS_ErrorRevieved;
+}
+
+bool NetworkManagerClient::RecievedError() {
+	if (mError.empty()) {
+		return true;
+	}
+
+	LOG("Error: %s", mError);
+	return false;
+}
 
 void NetworkManagerClient::SendOutgoingPackets()
 {
@@ -192,7 +212,6 @@ void NetworkManagerClient::DestroyGameObjectsInMap( const IntToGameObjectMap& in
 
 	
 }
-
 
 void NetworkManagerClient::UpdateSendingInputPacket()
 {

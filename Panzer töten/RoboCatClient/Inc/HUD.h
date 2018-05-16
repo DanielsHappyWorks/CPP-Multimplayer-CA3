@@ -10,6 +10,7 @@ public:
 	static std::unique_ptr< HUD >	sInstance;
 
 	void Render();
+	void	RenderError(string error);
 
 	void			SetPlayerHealth( int inHealth )	{ mHealth = inHealth; }
 
@@ -28,6 +29,7 @@ private:
 	Vector3										mScoreBoardOrigin;
 	Vector3										mScoreOffset;
 	Vector3										mHealthOffset;
+	Vector3										mErrorOrigin;
 	SDL_Rect									mViewTransform;
 
 	TTF_Font*									mFont;

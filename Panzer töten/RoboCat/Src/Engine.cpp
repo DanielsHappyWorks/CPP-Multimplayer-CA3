@@ -14,7 +14,6 @@ mShouldKeepRunning( true )
 	
 	GameObjectRegistry::StaticInit();
 
-
 	World::StaticInit();
 
 	ScoreBoardManager::StaticInit();

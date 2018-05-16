@@ -9,6 +9,7 @@ mBandwidthOrigin( 25.f, 650.f, 0.0f ),
 mRoundTripTimeOrigin( 25.f, 670.f, 0.0f ),
 mScoreOffset( 0.f, 25.f, 0.0f ),
 mHealthOffset( 1100, 10.f, 0.0f ),
+mErrorOrigin(100.f, 670.f, 0.0f),
 mHealth( 0 )
 {
 	TTF_Init();
@@ -64,17 +65,31 @@ void HUD::RenderRoundTripTime()
 	RenderText( roundTripTime, mRoundTripTimeOrigin, Colors::White );
 }
 
+void HUD::RenderError(string error) {
+	string errorMSG = StringUtils::Sprintf("Error %s", error);
+	RenderText(errorMSG, mErrorOrigin, Colors::White);
+}
+
 void HUD::RenderScoreBoard()
 {
-	string scoreBoardHeader = StringUtils::Sprintf("%-10s%-10s%-10s","Name","Score","Wins");
-	RenderText(scoreBoardHeader, mScoreBoardOrigin, Colors::Black);
+	RenderText("Name", mScoreBoardOrigin, Colors::Black);
+	mScoreBoardOrigin.mX += 150;
+	RenderText("Wins", mScoreBoardOrigin, Colors::Black);
+	mScoreBoardOrigin.mX += 100;
+	RenderText("Score", mScoreBoardOrigin, Colors::Black);
+	mScoreBoardOrigin.mX -= 250;
 
 	const vector< ScoreBoardManager::Entry >& entries = ScoreBoardManager::sInstance->GetEntries();
 	Vector3 offset = mScoreBoardOrigin + mScoreOffset;
 	
 	for( const auto& entry: entries )
 	{
-		RenderText( entry.GetFormattedNameScore(), offset, entry.GetColor() );
+		RenderText(entry.GetPlayerName(), offset, entry.GetColor() );
+		offset.mX += 150;
+		RenderText(std::to_string(entry.GetTotalScore()), offset, entry.GetColor());
+		offset.mX += 100;
+		RenderText(std::to_string(entry.GetSessionScore()), offset, entry.GetColor());
+		offset.mX -= 250;
 		offset.mX += mScoreOffset.mX;
 		offset.mY += mScoreOffset.mY;
 	}

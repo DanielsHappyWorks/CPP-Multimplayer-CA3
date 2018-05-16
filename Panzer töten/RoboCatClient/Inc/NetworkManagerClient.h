@@ -7,7 +7,8 @@ class NetworkManagerClient : public NetworkManager
 	{
 		NCS_Uninitialized,
 		NCS_SayingHello,
-		NCS_Welcomed
+		NCS_Welcomed,
+		NCS_ErrorRevieved
 	};
 
 public:
@@ -23,6 +24,8 @@ public:
 			float									GetRoundTripTime()		const	{ return mAvgRoundTripTime.GetValue(); }
 			int		GetPlayerId()											const	{ return mPlayerId; }
 			float	GetLastMoveProcessedByServerTimestamp()					const	{ return mLastMoveProcessedByServerTimestamp; }
+			bool RecievedError();
+			string mError;
 private:
 			NetworkManagerClient();
 			void Init( const SocketAddress& inServerAddress, const string& inName, const string& inPass);
@@ -36,13 +39,12 @@ private:
 
 			void	HandleGameObjectState( InputMemoryBitStream& inInputStream );
 			void	HandleScoreBoardState( InputMemoryBitStream& inInputStream );
+			void	HandleErrorPacket(InputMemoryBitStream& inInputStream);
 
 			void	UpdateSendingInputPacket();
 			void	SendInputPacket();
 
 			void	DestroyGameObjectsInMap( const IntToGameObjectMap& inObjectsToDestroy );
-
-
 	
 	DeliveryNotificationManager	mDeliveryNotificationManager;
 	ReplicationManagerClient	mReplicationManagerClient;
