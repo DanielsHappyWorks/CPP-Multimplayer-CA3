@@ -1,13 +1,13 @@
 //
 //  ByteSwap.h
-//  RoboCat
+//  Panzer
 //
 //  Created by Joshua Glazer on 4/20/14.
 //  Copyright (c) 2014 com.JoshuaGlazer.Book. All rights reserved.
 //
 
-#ifndef RoboCat_ByteSwap_h
-#define RoboCat_ByteSwap_h
+#ifndef Panzer_ByteSwap_h
+#define Panzer_ByteSwap_h
 
 inline uint16_t ByteSwap2( uint16_t inData )
 {

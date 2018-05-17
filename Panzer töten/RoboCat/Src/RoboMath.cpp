@@ -1,12 +1,12 @@
 //
 //  RoboMath.cpp
-//  RoboCat
+//  Panzer
 //
 //  Created by Joshua Glazer on 6/13/15.
 //  Copyright (c) 2015 com.JoshuaGlazer.Book. All rights reserved.
 //
 
-#include "RoboCatPCH.h"
+#include "PanzerPCH.h"
 
 #include <random>
 

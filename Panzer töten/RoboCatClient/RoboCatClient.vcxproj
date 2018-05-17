@@ -16,7 +16,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\YarnClient.cpp" />
+    <ClCompile Include="Src\BulletClient.cpp" />
     <ClCompile Include="Src\Client.cpp" />
     <ClCompile Include="Src\ClientMain.cpp" />
     <ClCompile Include="Src\GraphicsDriver.cpp" />
@@ -25,12 +25,12 @@
     <ClCompile Include="Src\NetworkManagerClient.cpp" />
     <ClCompile Include="Src\RenderManager.cpp" />
     <ClCompile Include="Src\ReplicationManagerClient.cpp" />
-    <ClCompile Include="Src\RoboCatClient.cpp" />
+    <ClCompile Include="Src\PanzerClient.cpp" />
     <ClCompile Include="Src\SpriteComponent.cpp" />
     <ClCompile Include="Src\Texture.cpp" />
     <ClCompile Include="Src\TextureManager.cpp" />
-    <ClCompile Include="Src\MouseClient.cpp" />
-    <ClCompile Include="Src\RoboCatClientPCH.cpp">
+    <ClCompile Include="Src\PickupClient.cpp" />
+    <ClCompile Include="Src\PanzerClientPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -39,18 +39,18 @@
   <ItemGroup>
     <ClInclude Include="Inc\Client.h" />
     <ClInclude Include="Inc\GraphicsDriver.h" />
-    <ClInclude Include="Inc\YarnClient.h" />
+    <ClInclude Include="Inc\BulletClient.h" />
     <ClInclude Include="Inc\HUD.h" />
     <ClInclude Include="Inc\NetworkManagerClient.h" />
     <ClInclude Include="Inc\ReplicationManagerClient.h" />
-    <ClInclude Include="Inc\RoboCatClient.h" />
+    <ClInclude Include="Inc\PanzerClient.h" />
     <ClInclude Include="Inc\InputManager.h" />
     <ClInclude Include="Inc\RenderManager.h" />
     <ClInclude Include="Inc\SpriteComponent.h" />
     <ClInclude Include="Inc\Texture.h" />
     <ClInclude Include="Inc\TextureManager.h" />
-    <ClInclude Include="Inc\MouseClient.h" />
-    <ClInclude Include="Inc\RoboCatClientPCH.h" />
+    <ClInclude Include="Inc\PickupClient.h" />
+    <ClInclude Include="Inc\PanzerClientPCH.h" />
     <ClInclude Include="Inc\WindowManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -58,6 +58,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>RoboCatClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <ProjectName>PanzerClient</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -96,7 +97,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <PrecompiledHeaderFile>RoboCatClientPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>PanzerClientPCH.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>..\SDL\include;Inc;..\;..\RoboCat\Inc</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>

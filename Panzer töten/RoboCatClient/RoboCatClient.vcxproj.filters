@@ -15,9 +15,6 @@
     <ClCompile Include="Src\ClientMain.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\RoboCatClientPCH.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Client.cpp">
       <Filter>Src</Filter>
     </ClCompile>
@@ -51,20 +48,20 @@
     <ClCompile Include="Src\ReplicationManagerClient.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\RoboCatClient.cpp">
+    <ClCompile Include="Src\PanzerClient.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\MouseClient.cpp">
+    <ClCompile Include="Src\PanzerClientPCH.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\YarnClient.cpp">
+    <ClCompile Include="Src\PickupClient.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\BulletClient.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Inc\RoboCatClientPCH.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\Client.h">
       <Filter>Inc</Filter>
     </ClInclude>
@@ -98,13 +95,16 @@
     <ClInclude Include="Inc\ReplicationManagerClient.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\RoboCatClient.h">
+    <ClInclude Include="Inc\PanzerClientPCH.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\MouseClient.h">
+    <ClInclude Include="Inc\PanzerClient.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\YarnClient.h">
+    <ClInclude Include="Inc\PickupClient.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\BulletClient.h">
       <Filter>Inc</Filter>
     </ClInclude>
   </ItemGroup>

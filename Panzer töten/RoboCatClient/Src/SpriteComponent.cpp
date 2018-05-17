@@ -1,4 +1,4 @@
-#include <RoboCatClientPCH.h>
+#include <PanzerClientPCH.h>
 
 SpriteComponent::SpriteComponent( GameObject *inGameObject ) :
 	mGameObject( inGameObject )

@@ -1,7 +1,7 @@
 
 
-#ifndef RoboCat_LinkingContext_h
-#define RoboCat_LinkingContext_h
+#ifndef Panzer_LinkingContext_h
+#define Panzer_LinkingContext_h
 
 class GameObject;
 

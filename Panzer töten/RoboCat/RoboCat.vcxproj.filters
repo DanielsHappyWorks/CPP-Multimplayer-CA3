@@ -19,9 +19,6 @@
     <ClInclude Include="Inc\World.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\RoboCatPCH.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\InputAction.h">
       <Filter>Inc</Filter>
     </ClInclude>
@@ -41,9 +38,6 @@
       <Filter>Inc</Filter>
     </ClInclude>
     <ClInclude Include="Inc\InputState.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
-    <ClInclude Include="Inc\RoboCatShared.h">
       <Filter>Inc</Filter>
     </ClInclude>
     <ClInclude Include="Inc\UDPSocket.h">
@@ -100,13 +94,19 @@
     <ClInclude Include="Inc\LinkingContext.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\RoboCat.h">
+    <ClInclude Include="Inc\Panzer.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\Mouse.h">
+    <ClInclude Include="Inc\PanzerShared.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\Yarn.h">
+    <ClInclude Include="Inc\Pickup.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Bullet.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\PanzerPCH.h">
       <Filter>Inc</Filter>
     </ClInclude>
   </ItemGroup>
@@ -115,9 +115,6 @@
       <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Src\World.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\RoboCatPCH.cpp">
       <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Src\Timing.cpp">
@@ -177,13 +174,16 @@
     <ClCompile Include="Src\TCPSocket.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\RoboCat.cpp">
+    <ClCompile Include="Src\Panzer.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Mouse.cpp">
+    <ClCompile Include="Src\PanzerPCH.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Yarn.cpp">
+    <ClCompile Include="Src\Pickup.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Bullet.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -15,9 +15,6 @@
     <ClCompile Include="Src\ServerMain.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\RoboCatServerPCH.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Server.cpp">
       <Filter>Src</Filter>
     </ClCompile>
@@ -33,20 +30,20 @@
     <ClCompile Include="Src\ReplicationManagerTransmissionData.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\RoboCatServer.cpp">
+    <ClCompile Include="Src\PanzerServer.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\MouseServer.cpp">
+    <ClCompile Include="Src\PanzerServerPCH.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\YarnServer.cpp">
+    <ClCompile Include="Src\PickupServer.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\BulletServer.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Inc\RoboCatServerPCH.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\Server.h">
       <Filter>Inc</Filter>
     </ClInclude>
@@ -62,13 +59,16 @@
     <ClInclude Include="Inc\ReplicationManagerTransmissionData.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\RoboCatServer.h">
+    <ClInclude Include="Inc\PanzerServer.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\MouseServer.h">
+    <ClInclude Include="Inc\PanzerServerPCH.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\YarnServer.h">
+    <ClInclude Include="Inc\PickupServer.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\BulletServer.h">
       <Filter>Inc</Filter>
     </ClInclude>
   </ItemGroup>

@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>RoboCat</ProjectName>
+    <ProjectName>Panzer</ProjectName>
     <ProjectGuid>{B3B75176-8D81-4E7B-A5D0-C2E5423844D3}</ProjectGuid>
     <RootNamespace>SimpleSample</RootNamespace>
     <Keyword>Win32Proj</Keyword>
@@ -130,7 +130,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <AdditionalIncludeDirectories>..\SDL\include;Inc;..\</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>RoboCatPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>PanzerPCH.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3d11.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -372,7 +372,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Inc\AckRange.h" />
-    <ClInclude Include="Inc\Yarn.h" />
+    <ClInclude Include="Inc\Bullet.h" />
     <ClInclude Include="Inc\ByteSwap.h" />
     <ClInclude Include="Inc\DeliveryNotificationManager.h" />
     <ClInclude Include="Inc\Engine.h" />
@@ -389,22 +389,22 @@
     <ClInclude Include="Inc\ReplicationCommand.h" />
     <ClInclude Include="Inc\RoboMath.h" />
     <ClInclude Include="Inc\ScoreBoardManager.h" />
-    <ClInclude Include="Inc\RoboCat.h" />
+    <ClInclude Include="Inc\Panzer.h" />
     <ClInclude Include="Inc\SocketAddress.h" />
     <ClInclude Include="Inc\SocketAddressFactory.h" />
     <ClInclude Include="Inc\SocketUtil.h" />
     <ClInclude Include="Inc\StringUtils.h" />
     <ClInclude Include="Inc\TCPSocket.h" />
     <ClInclude Include="Inc\Timing.h" />
-    <ClInclude Include="Inc\Mouse.h" />
-    <ClInclude Include="Inc\RoboCatPCH.h" />
-    <ClInclude Include="Inc\RoboCatShared.h" />
+    <ClInclude Include="Inc\Pickup.h" />
+    <ClInclude Include="Inc\PanzerPCH.h" />
+    <ClInclude Include="Inc\PanzerShared.h" />
     <ClInclude Include="Inc\TransmissionData.h" />
     <ClInclude Include="Inc\UDPSocket.h" />
     <ClInclude Include="Inc\WeightedTimedMovingAverage.h" />
     <ClInclude Include="Inc\World.h" />
     <ClCompile Include="Src\AckRange.cpp" />
-    <ClCompile Include="Src\Yarn.cpp" />
+    <ClCompile Include="Src\Bullet.cpp" />
     <ClCompile Include="Src\DeliveryNotificationManager.cpp" />
     <ClCompile Include="Src\Engine.cpp" />
     <ClCompile Include="Src\GameObjectRegistry.cpp" />
@@ -416,7 +416,7 @@
     <ClCompile Include="Src\NetworkManager.cpp" />
     <ClCompile Include="Src\RoboMath.cpp" />
     <ClCompile Include="Src\ScoreBoardManager.cpp" />
-    <ClCompile Include="Src\RoboCat.cpp" />
+    <ClCompile Include="Src\Panzer.cpp" />
     <ClCompile Include="Src\SocketAddress.cpp" />
     <ClCompile Include="Src\SocketAddressFactory.cpp" />
     <ClCompile Include="Src\SocketUtil.cpp" />
@@ -429,17 +429,17 @@
   <ItemGroup>
     <ClCompile Include="Src\GameObject.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RoboCatPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PanzerPCH.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Src\Mouse.cpp" />
-    <ClCompile Include="Src\RoboCatPCH.cpp">
+    <ClCompile Include="Src\Pickup.cpp" />
+    <ClCompile Include="Src\PanzerPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RoboCatPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PanzerPCH.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Src\UDPSocket.cpp" />
     <ClCompile Include="Src\World.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RoboCatPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PanzerPCH.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

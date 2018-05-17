@@ -1,5 +1,5 @@
 
-#include <RoboCatServerPCH.h>
+#include <PanzerServerPCH.h>
 
 
 
@@ -15,9 +15,9 @@ bool Server::StaticInit()
 Server::Server()
 {
 
-	GameObjectRegistry::sInstance->RegisterCreationFunction( 'RCAT', RoboCatServer::StaticCreate );
-	GameObjectRegistry::sInstance->RegisterCreationFunction( 'MOUS', MouseServer::StaticCreate );
-	GameObjectRegistry::sInstance->RegisterCreationFunction( 'YARN', YarnServer::StaticCreate );
+	GameObjectRegistry::sInstance->RegisterCreationFunction( 'RCAT', PanzerServer::StaticCreate );
+	GameObjectRegistry::sInstance->RegisterCreationFunction( 'MOUS', PickupServer::StaticCreate );
+	GameObjectRegistry::sInstance->RegisterCreationFunction( 'YARN', BulletServer::StaticCreate );
 
 	InitNetworkManager();
 	
@@ -59,14 +59,14 @@ bool Server::InitNetworkManager()
 namespace
 {
 	
-	void CreateRandomMice( int inMouseCount, Mouse::PickupType type)
+	void CreateRandomMice( int inPickupCount, Pickup::PickupType type)
 	{
 		Vector3 mouseMin( -5.f, -3.f, 0.f );
 		Vector3 mouseMax( 5.f, 3.f, 0.f );
 		GameObjectPtr go;
 
 		//make a mouse somewhere- where will these come from?
-		for( int i = 0; i < inMouseCount; ++i )
+		for( int i = 0; i < inPickupCount; ++i )
 		{
 			go = GameObjectRegistry::sInstance->CreateGameObject( 'MOUS' );
 			go->setType(type);
@@ -82,9 +82,9 @@ namespace
 void Server::SetupWorld()
 {
 	//spawn some health
-	CreateRandomMice(3, Mouse::PickupType::health);
+	CreateRandomMice(3, Pickup::PickupType::health);
 	//spawn some mines
-	CreateRandomMice(3, Mouse::PickupType::mine);
+	CreateRandomMice(3, Pickup::PickupType::mine);
 }
 
 void Server::DoFrame()
@@ -140,7 +140,7 @@ void Server::HandleNewClient( ClientProxyPtr inClientProxy )
 
 void Server::SpawnCatForPlayer( int inPlayerId )
 {
-	RoboCatPtr cat = std::static_pointer_cast< RoboCat >( GameObjectRegistry::sInstance->CreateGameObject( 'RCAT' ) );
+	PanzerPtr cat = std::static_pointer_cast< Panzer >( GameObjectRegistry::sInstance->CreateGameObject( 'RCAT' ) );
 	cat->SetColor( ScoreBoardManager::sInstance->GetEntry( inPlayerId )->GetColor() );
 	cat->SetPlayerId( inPlayerId );
 	//gotta pick a better spawn location than this...
@@ -158,14 +158,14 @@ void Server::HandleLostClient( ClientProxyPtr inClientProxy )
 	int playerId = inClientProxy->GetPlayerId();
 
 	ScoreBoardManager::sInstance->RemoveEntry( playerId );
-	RoboCatPtr cat = GetCatForPlayer( playerId );
+	PanzerPtr cat = GetCatForPlayer( playerId );
 	if( cat )
 	{
 		cat->SetDoesWantToDie( true );
 	}
 }
 
-RoboCatPtr Server::GetCatForPlayer( int inPlayerId )
+PanzerPtr Server::GetCatForPlayer( int inPlayerId )
 {
 	//run through the objects till we find the cat...
 	//it would be nice if we kept a pointer to the cat on the clientproxy
@@ -175,10 +175,10 @@ RoboCatPtr Server::GetCatForPlayer( int inPlayerId )
 	for( int i = 0, c = gameObjects.size(); i < c; ++i )
 	{
 		GameObjectPtr go = gameObjects[ i ];
-		RoboCat* cat = go->GetAsCat();
+		Panzer* cat = go->GetAsCat();
 		if( cat && cat->GetPlayerId() == inPlayerId )
 		{
-			return std::static_pointer_cast< RoboCat >( go );
+			return std::static_pointer_cast< Panzer >( go );
 		}
 	}
 

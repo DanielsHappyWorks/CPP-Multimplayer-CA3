@@ -1,4 +1,4 @@
-#include <RoboCatClientPCH.h>
+#include <PanzerClientPCH.h>
 
 bool Client::StaticInit( )
 {
@@ -28,9 +28,9 @@ bool Client::StaticInit( )
 
 Client::Client()
 {
-	GameObjectRegistry::sInstance->RegisterCreationFunction( 'RCAT', RoboCatClient::StaticCreate );
-	GameObjectRegistry::sInstance->RegisterCreationFunction( 'MOUS', MouseClient::StaticCreate );
-	GameObjectRegistry::sInstance->RegisterCreationFunction( 'YARN', YarnClient::StaticCreate );
+	GameObjectRegistry::sInstance->RegisterCreationFunction( 'RCAT', PanzerClient::StaticCreate );
+	GameObjectRegistry::sInstance->RegisterCreationFunction( 'MOUS', PickupClient::StaticCreate );
+	GameObjectRegistry::sInstance->RegisterCreationFunction( 'YARN', BulletClient::StaticCreate );
 
 	string destination;
 	string name;
