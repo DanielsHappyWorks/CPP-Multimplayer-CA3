@@ -9,7 +9,7 @@ mBandwidthOrigin( 25.f, 650.f, 0.0f ),
 mRoundTripTimeOrigin( 25.f, 670.f, 0.0f ),
 mScoreOffset( 0.f, 25.f, 0.0f ),
 mHealthOffset( 1100, 10.f, 0.0f ),
-mErrorOrigin(100.f, 670.f, 0.0f),
+mErrorOrigin(450.f, 300.f, 0.0f),
 mHealth( 0 )
 {
 	TTF_Init();
@@ -66,7 +66,7 @@ void HUD::RenderRoundTripTime()
 }
 
 void HUD::RenderError(string error) {
-	string errorMSG = StringUtils::Sprintf("Error %s", error);
+	string errorMSG = StringUtils::Sprintf("Error %s", error.c_str());
 	RenderText(errorMSG, mErrorOrigin, Colors::White);
 }
 

@@ -72,11 +72,6 @@ void Client::DoFrame()
 
 		RenderManager::sInstance->Render();
 
-		//render aditional HUD if error occured
-		if (!NetworkManagerClient::sInstance->RecievedError()) {
-			HUD::sInstance->RenderError(NetworkManagerClient::sInstance->mError);
-		}
-
 		NetworkManagerClient::sInstance->SendOutgoingPackets();
 }
 

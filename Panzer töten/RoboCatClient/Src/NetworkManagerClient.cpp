@@ -66,11 +66,9 @@ void NetworkManagerClient::HandleErrorPacket(InputMemoryBitStream& inInputStream
 
 bool NetworkManagerClient::RecievedError() {
 	if (mError.empty()) {
-		return true;
+		return false;
 	}
-
-	LOG("Error: %s", mError);
-	return false;
+	return true;
 }
 
 void NetworkManagerClient::SendOutgoingPackets()

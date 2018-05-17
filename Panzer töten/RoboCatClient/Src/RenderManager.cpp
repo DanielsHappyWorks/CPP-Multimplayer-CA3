@@ -78,6 +78,11 @@ void RenderManager::Render()
 
 	HUD::sInstance->Render();
 	
+	//render aditional HUD if error occured
+	if (NetworkManagerClient::sInstance->RecievedError()) {
+		HUD::sInstance->RenderError(NetworkManagerClient::sInstance->mError);
+	}
+
 	//
     // Present our back buffer to our front buffer
     //
