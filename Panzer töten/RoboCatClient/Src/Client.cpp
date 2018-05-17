@@ -64,29 +64,55 @@ Client::Client()
 
 void Client::DoFrame()
 {
-		InputManager::sInstance->Update();
-
-		Engine::DoFrame();
-
+	InputManager::sInstance->Update();
+	Engine::DoFrame();
+	if (NetworkManagerClient::sInstance->GetState() == NetworkManagerClient::NetworkClientState::NCS_Menu) {
+		RenderManager::sInstance->RenderMenu();
+	}
+	else {
 		NetworkManagerClient::sInstance->ProcessIncomingPackets();
 
 		RenderManager::sInstance->Render();
 
 		NetworkManagerClient::sInstance->SendOutgoingPackets();
+	}
 }
 
 void Client::HandleEvent( SDL_Event* inEvent )
 {
-	switch( inEvent->type )
-	{
-	case SDL_KEYDOWN:
-		InputManager::sInstance->HandleInput( EIA_Pressed, inEvent->key.keysym.sym );
-		break;
-	case SDL_KEYUP:
-		InputManager::sInstance->HandleInput( EIA_Released, inEvent->key.keysym.sym );
-		break;
-	default:
-		break;
+	if (NetworkManagerClient::sInstance->GetState() == NetworkManagerClient::NetworkClientState::NCS_Menu) {
+		switch (inEvent->type)
+		{
+		case SDL_KEYDOWN:
+			NetworkManagerClient::sInstance->SetState(NetworkManagerClient::NetworkClientState::NCS_SayingHello);
+			break;
+		default:
+			break;
+		}
+	}
+	if (NetworkManagerClient::sInstance->GetState() == NetworkManagerClient::NetworkClientState::NCS_ErrorRevieved) {
+		switch (inEvent->type)
+		{
+		case SDL_KEYDOWN:
+			NetworkManagerClient::sInstance->SetState(NetworkManagerClient::NetworkClientState::NCS_Menu);
+			NetworkManagerClient::sInstance->mError = "";
+			break;
+		default:
+			break;
+		}
+	}
+	else {
+		switch (inEvent->type)
+		{
+		case SDL_KEYDOWN:
+			InputManager::sInstance->HandleInput(EIA_Pressed, inEvent->key.keysym.sym);
+			break;
+		case SDL_KEYUP:
+			InputManager::sInstance->HandleInput(EIA_Released, inEvent->key.keysym.sym);
+			break;
+		default:
+			break;
+		}
 	}
 }
 

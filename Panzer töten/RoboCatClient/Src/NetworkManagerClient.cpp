@@ -26,7 +26,7 @@ void NetworkManagerClient::Init( const SocketAddress& inServerAddress, const str
 	NetworkManager::Init( 0 );
 
 	mServerAddress = inServerAddress;
-	mState = NCS_SayingHello;
+	mState = NCS_Menu;
 	mTimeOfLastHello = 0.f;
 	mName = inName;
 	mPassword = inPass;

@@ -87,5 +87,22 @@ void RenderManager::Render()
     // Present our back buffer to our front buffer
     //
 	GraphicsDriver::sInstance->Present();
+}
+
+void RenderManager::RenderMenu()
+{
+	//
+	// Clear the back buffer
+	//
+	GraphicsDriver::sInstance->Clear();
+
+	HUD::sInstance->RenderMenu();
+
+	//render aditional HUD if error occured
+	if (NetworkManagerClient::sInstance->RecievedError()) {
+		HUD::sInstance->RenderError(NetworkManagerClient::sInstance->mError);
+	}
+
+	GraphicsDriver::sInstance->Present();
 
 }

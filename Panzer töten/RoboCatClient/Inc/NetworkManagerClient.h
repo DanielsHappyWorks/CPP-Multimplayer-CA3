@@ -3,15 +3,15 @@
 
 class NetworkManagerClient : public NetworkManager
 {
+public:
 	enum NetworkClientState
 	{
 		NCS_Uninitialized,
 		NCS_SayingHello,
 		NCS_Welcomed,
+		NCS_Menu,
 		NCS_ErrorRevieved
 	};
-
-public:
 	static NetworkManagerClient*	sInstance;
 
 	static	void	StaticInit( const SocketAddress& inServerAddress, const string& inName, const string& inPass);
@@ -26,6 +26,8 @@ public:
 			float	GetLastMoveProcessedByServerTimestamp()					const	{ return mLastMoveProcessedByServerTimestamp; }
 			bool RecievedError();
 			string mError;
+			void SetState(NetworkClientState s) { mState = s; }
+			NetworkClientState GetState() { return mState; }
 private:
 			NetworkManagerClient();
 			void Init( const SocketAddress& inServerAddress, const string& inName, const string& inPass);

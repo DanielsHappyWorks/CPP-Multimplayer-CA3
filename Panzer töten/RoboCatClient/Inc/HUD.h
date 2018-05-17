@@ -11,7 +11,7 @@ public:
 
 	void Render();
 	void	RenderError(string error);
-
+	void	RenderMenu();
 	void			SetPlayerHealth( int inHealth )	{ mHealth = inHealth; }
 
 private:
@@ -22,7 +22,7 @@ private:
 	void	RenderRoundTripTime();
 	void	RenderScoreBoard();
 	void	RenderHealth();
-	void	RenderText( const string& inStr, const Vector3& origin, const Vector3& inColor );
+	void	RenderText(const string& inStr, const Vector3& origin, const Vector3& inColor, int font = 0);
 
 	Vector3										mBandwidthOrigin;
 	Vector3										mRoundTripTimeOrigin;
@@ -32,7 +32,9 @@ private:
 	Vector3										mErrorOrigin;
 	SDL_Rect									mViewTransform;
 
-	TTF_Font*									mFont;
+	TTF_Font*									mFontAlpha;
+	TTF_Font*									mFontBravo;
+	TTF_Font*									mFontCharlie;
 	int											mHealth;
 };
 
