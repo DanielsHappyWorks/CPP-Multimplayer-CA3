@@ -83,6 +83,11 @@ void RenderManager::Render()
 		HUD::sInstance->RenderError(NetworkManagerClient::sInstance->mError);
 	}
 
+	//render broadcast if broadcast timer is valid
+	if (Timing::sInstance.GetFrameStartTime() < NetworkManagerClient::sInstance->mBroadcastTime) {
+		HUD::sInstance->RenderBroadcast(NetworkManagerClient::sInstance->mBroadcast);
+	}
+
 	//
     // Present our back buffer to our front buffer
     //
@@ -97,11 +102,6 @@ void RenderManager::RenderMenu()
 	GraphicsDriver::sInstance->Clear();
 
 	HUD::sInstance->RenderMenu();
-
-	//render aditional HUD if error occured
-	if (NetworkManagerClient::sInstance->RecievedError()) {
-		HUD::sInstance->RenderError(NetworkManagerClient::sInstance->mError);
-	}
 
 	GraphicsDriver::sInstance->Present();
 

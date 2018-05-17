@@ -1,8 +1,6 @@
+Daniel
+2204
+Peter
+9693
 DefName
-DefPassword
-DefName1
-DefPassword
-Dan
-DefPassword
-Dan123
 DefPassword

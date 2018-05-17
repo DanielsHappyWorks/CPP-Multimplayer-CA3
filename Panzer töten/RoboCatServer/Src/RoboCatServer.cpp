@@ -82,7 +82,7 @@ void RoboCatServer::TakeDamage( int inDamagingPlayerId )
 		//score one for damaging player...
 		ScoreBoardManager::sInstance->IncSessionScore( inDamagingPlayerId, 1 );
 
-		if (ScoreBoardManager::sInstance->GetEntry(inDamagingPlayerId)->GetSessionScore() >= 10) {
+		if (ScoreBoardManager::sInstance->GetEntry(inDamagingPlayerId)->GetSessionScore() >= 3) {
 			ScoreBoardManager::sInstance->SetSessionWinner(inDamagingPlayerId);
 
 			std::string output = "";
@@ -96,6 +96,8 @@ void RoboCatServer::TakeDamage( int inDamagingPlayerId )
 					output += "\n";
 					if (savedName == ScoreBoardManager::sInstance->GetEntry(inDamagingPlayerId)->GetPlayerName()) {
 						output += std::to_string(ScoreBoardManager::sInstance->GetEntry(inDamagingPlayerId)->GetTotalScore());
+						std::string msg = StringUtils::Sprintf("%s won the round", savedName.c_str());
+						NetworkManagerServer::sInstance->SendBroadcastMessage(msg);
 					}
 					else {
 						output += savedScore;

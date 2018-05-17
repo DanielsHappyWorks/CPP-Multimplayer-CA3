@@ -189,6 +189,22 @@ void NetworkManagerServer::SendErrorPacket(const SocketAddress& inFromAddress, s
 	SendPacket(errorPacket, inFromAddress);
 }
 
+void NetworkManagerServer::SendBroadcastMessage(string msg)
+{
+	OutputMemoryBitStream broadcastPacket;
+
+	broadcastPacket.Write(kBroabcastCC);
+	broadcastPacket.Write(msg);
+
+	LOG("Broadcast %s", msg.c_str());
+
+	for (auto it = mAddressToClientMap.begin(), end = mAddressToClientMap.end(); it != end; ++it)
+	{
+		ClientProxyPtr clientProxy = it->second;
+		SendPacket(broadcastPacket, clientProxy->GetSocketAddress());
+	}
+}
+
 void NetworkManagerServer::RespawnCats()
 {
 	for( auto it = mAddressToClientMap.begin(), end = mAddressToClientMap.end(); it != end; ++it )

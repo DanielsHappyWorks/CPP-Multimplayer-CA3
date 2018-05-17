@@ -8,6 +8,7 @@ public:
 	static const uint32_t	kStateCC = 'STAT';
 	static const uint32_t	kInputCC = 'INPT';
 	static const uint32_t	kErrorCC = 'ERR';
+	static const uint32_t	kBroabcastCC = 'BROD';
 	static const int		kMaxPacketsPerFrameCount = 10;
 
 	NetworkManager();

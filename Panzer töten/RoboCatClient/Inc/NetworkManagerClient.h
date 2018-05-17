@@ -25,7 +25,8 @@ public:
 			int		GetPlayerId()											const	{ return mPlayerId; }
 			float	GetLastMoveProcessedByServerTimestamp()					const	{ return mLastMoveProcessedByServerTimestamp; }
 			bool RecievedError();
-			string mError;
+			string mError,mBroadcast;
+			float mBroadcastTime;
 			void SetState(NetworkClientState s) { mState = s; }
 			NetworkClientState GetState() { return mState; }
 private:
@@ -42,6 +43,7 @@ private:
 			void	HandleGameObjectState( InputMemoryBitStream& inInputStream );
 			void	HandleScoreBoardState( InputMemoryBitStream& inInputStream );
 			void	HandleErrorPacket(InputMemoryBitStream& inInputStream);
+			void	HandleBroadcastPacket(InputMemoryBitStream& inInputStream);
 
 			void	UpdateSendingInputPacket();
 			void	SendInputPacket();

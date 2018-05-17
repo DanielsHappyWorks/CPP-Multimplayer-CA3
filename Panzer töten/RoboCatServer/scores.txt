@@ -1,8 +1,6 @@
+Peter
+9000
+Daniel
+1234
 DefName
 0
-DefName1
-0
-Dan
-0
-Dan123
-1

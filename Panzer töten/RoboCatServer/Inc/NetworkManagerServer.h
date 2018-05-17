@@ -18,6 +18,7 @@ public:
 
 			void			RespawnCats();
 			void			ResetPickup();
+			void			SendBroadcastMessage(string msg);
 
 			ClientProxyPtr	GetClientProxy( int inPlayerId ) const;
 
@@ -29,6 +30,7 @@ private:
 			
 			void	SendWelcomePacket( ClientProxyPtr inClientProxy );
 			void	SendErrorPacket(const SocketAddress& inFromAddress, string msg);
+
 			void	UpdateAllClients();
 			
 			void	AddWorldStateToPacket( OutputMemoryBitStream& inOutputStream );

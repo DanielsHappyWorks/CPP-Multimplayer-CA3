@@ -9,10 +9,12 @@ namespace
 }
 
 NetworkManagerClient::NetworkManagerClient() :
-	mState( NCS_Uninitialized ),
-	mDeliveryNotificationManager( true, false ),
-	mLastRoundTripTime( 0.f )
+	mState(NCS_Uninitialized),
+	mDeliveryNotificationManager(true, false),
+	mLastRoundTripTime(0.f),
+	mBroadcastTime(Timing::sInstance.GetFrameStartTime())
 {
+	
 }
 
 void NetworkManagerClient::StaticInit( const SocketAddress& inServerAddress, const string& inName, const string& inPass)
@@ -46,6 +48,9 @@ void NetworkManagerClient::ProcessPacket( InputMemoryBitStream& inInputStream, c
 	case kErrorCC:
 		HandleErrorPacket(inInputStream);
 		break;
+	case kBroabcastCC:
+		HandleBroadcastPacket(inInputStream);
+		break;
 	case kStateCC:
 		if( mDeliveryNotificationManager.ReadAndProcessState( inInputStream ) )
 		{
@@ -59,9 +64,17 @@ void NetworkManagerClient::HandleErrorPacket(InputMemoryBitStream& inInputStream
 {
 	std::string errorMsg;
 	inInputStream.Read(errorMsg);
-	LOG("Error: %s", errorMsg);
 	mError = errorMsg;
 	mState = NCS_ErrorRevieved;
+}
+
+void NetworkManagerClient::HandleBroadcastPacket(InputMemoryBitStream& inInputStream)
+{
+	std::string broadcastMsg;
+	inInputStream.Read(broadcastMsg);
+	LOG("Broadcast: %s", broadcastMsg.c_str());
+	mBroadcastTime = Timing::sInstance.GetFrameStartTime() + 1.5f;
+	mBroadcast = broadcastMsg;
 }
 
 bool NetworkManagerClient::RecievedError() {

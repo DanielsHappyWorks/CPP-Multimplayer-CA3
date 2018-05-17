@@ -11,6 +11,7 @@ public:
 
 	void Render();
 	void	RenderError(string error);
+	void	RenderBroadcast(string broadcast);
 	void	RenderMenu();
 	void			SetPlayerHealth( int inHealth )	{ mHealth = inHealth; }
 
@@ -29,7 +30,7 @@ private:
 	Vector3										mScoreBoardOrigin;
 	Vector3										mScoreOffset;
 	Vector3										mHealthOffset;
-	Vector3										mErrorOrigin;
+	Vector3										mErrorOrigin, mBroadcastOrigin;
 	SDL_Rect									mViewTransform;
 
 	TTF_Font*									mFontAlpha;
